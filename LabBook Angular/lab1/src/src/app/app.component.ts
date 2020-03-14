@@ -6,15 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  empId = '';
-  name = '';
-  salary = '';
-  dept = '';
-
-
   onClickAdd(data)
   {
-    alert("ID="+this.empId+" Name="+this.name+" Salary="+this.salary+" Department="+this.dept);
+    alert("ID="+data.empId+" Name="+data.nam+" Salary="+data.sal+" Department="+data.dept);
   }
   
 }

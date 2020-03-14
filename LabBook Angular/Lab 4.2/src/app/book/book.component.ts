@@ -1,4 +1,4 @@
-import { BooklistService } from './../booklist.service';
+ import { BooklistService } from './../booklist.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -10,6 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class BookComponent implements OnInit {
 
   books:Book[];
+  searchId = '';
+  searchTitle= '';
+  searchYear = '';
+  searchAuthor = '';
 
   constructor(private booklistservice: BooklistService) { }
 

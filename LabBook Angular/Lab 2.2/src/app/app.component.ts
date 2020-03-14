@@ -1,91 +1,64 @@
 import { Component } from '@angular/core';
+import { splitClasses } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  id;
-  name;
-  salary;
-  department;
-
-  items = [{empId:1001,empName:'Rahul',empSal:9000,empDep:'JAVA',empjoiningdate:'6/12/2014'},
-  {empId:1002,empName:'Vikash',empSal:11000,empDep:'ORAAPS',empjoiningdate:'6/12/2017'},
-  {empId:1003,empName:'Uma',empSal:12000,empDep:'JAVA',empjoiningdate:'6/12/2010'},
-  {empId:1004,empName:'Sachin',empSal:11500,empDep:'ORAAPS',empjoiningdate:'11/12/2017'},
-  {empId:1005,empName:'Amol',empSal:7000,empDep:'.NET',empjoiningdate:'1/1/2018'},
-  {empId:1006,empName:'Vishal',empSal:17000,empDep:'BI',empjoiningdate:'9/12/2012'},
-  {empId:1007,empName:'Rajita',empSal:21000,empDep:'BI',empjoiningdate:'6/7/2014'},
-  {empId:1008,empName:'Neelima',empSal:81000,empDep:'TESTING',empjoiningdate:'6/17/2015'},
-  {empId:1009,empName:'Daya',empSal:1000,empDep:'TESTING',empjoiningdate:'6/17/2016'}];
-
-  sortByID()
+export class AppComponent 
+{
+  public empId;
+  public nam;
+  public sal;
+  public dept;
+  public up_empId;
+  public up_nam;
+  public up_sal;
+  public up_dept;
+  public arr=[ {"id":1001,"name":"Rahul","salary":9000,"department":"Java"},
+                   {"id":1002,"name":"Sachin","salary":19000,"department":"OraApps"},
+                   {"id":1003,"name":"Vikash","salary":29000,"department":"BI"}];
+  onClickAdd(data)
   {
-    for(var i=0;i<this.items.length-1;i++)
-    {
-      for(var j=i+1;j<this.items.length;j++)
-      {
-        if(this.items[i].empId > this.items[j].empId)
-        {
-          var temp;
-          temp=this.items[i];
-          this.items[i]=this.items[j];
-          this.items[j]=temp;
-        }
-      }
-    }
+    this.empId=data.empId;
+    this.nam=data.nam;
+    this.sal=data.sal;
+    this.dept=data.dept;
+    this.arr.push({"id":this.empId,"name":this.nam,"salary":this.sal,"department":this.dept});
+    document.getElementById("current").innerHTML="ID:"+this.empId+","+"Name:"+this.nam+","+"Salary:"+this.sal+","+"Department:"+this.dept+" inserted into table";
   }
-  
-  sortByName()
+  update(event)
   {
-    for(var i=0;i<this.items.length-1;i++)
+       var update_loc=event.target.parentNode.parentNode.children;
+       this.up_empId=update_loc[0].textContent;
+       this.up_nam=update_loc[1].textContent;
+       this.up_sal=update_loc[2].textContent;
+       this.up_dept=update_loc[3].textContent;
+  }
+  update_dataOnClick()
+  {
+    for(var i=0;i<this.arr.length;i++)
     {
-      for(var j=i+1;j<this.items.length;j++)
+      if(this.up_empId==this.arr[i].id)
       {
-        if(this.items[i].empName > this.items[j].empName)
-        {
-          var temp;
-          temp=this.items[i];
-          this.items[i]=this.items[j];
-          this.items[j]=temp;
-        }
+        this.arr[i].name=this.up_nam;
+        this.arr[i].salary=this.up_sal;
+        this.arr[i].department=this.up_dept;
       }
     }
   }
 
-  sortBySal()
+  delete(event)
   {
-    for(var i=0;i<this.items.length-1;i++)
+    var delete_loc_id=event.target.parentNode.parentNode.children[0].textContent;
+    for(var i=0;i<this.arr.length;i++)
     {
-      for(var j=i+1;j<this.items.length;j++)
-      {
-        if(this.items[i].empSal > this.items[j].empSal)
-        {
-          var temp;
-          temp=this.items[i];
-          this.items[i]=this.items[j];
-          this.items[j]=temp;
-        }
-      }
-    }
-  }
-
-  sortByDep()
-  {
-    for(var i=0;i<this.items.length-1;i++)
-    {
-      for(var j=i+1;j<this.items.length;j++)
-      {
-        if(this.items[i].empDep > this.items[j].empDep)
-        {
-          var temp;
-          temp=this.items[i];
-          this.items[i]=this.items[j];
-          this.items[j]=temp;
-        }
-      }
+       if(this.arr[i].id==delete_loc_id)
+       {
+             this.arr.splice(i,1);
+             //break;
+       }
     }
   }
 }

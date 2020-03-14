@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { BooklistService } from './booklist.service';
-import { HttpModule } from '@angular/http';
+
+
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
